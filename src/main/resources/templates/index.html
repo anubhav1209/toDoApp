@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"
+		<title> Todo Application </title>
+	</head>
+	<body>
+		<h1>TO DO APPLICATION</h1>
+		<h1> what is up ??</h1>
+		
+		<div>
+			<th:block th:each="task : ${tasks}">
+				<div>
+					<span th:text="${task.title}"> TASK TITLE </span>
+				</div>
+				
+			</th:block>
+		</div>
+	</body>
+</html>
+
+
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>To-Do List</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: auto; }
+        form, ul { margin-top: 20px; }
+        li { display: flex; justify-content: space-between; margin: 5px 0; }
+        button { margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+
+    <form th:action="@{/add}" method="post">
+        <input type="text" th:field="*{task}" placeholder="New task..." required />
+        <button type="submit">Add</button>
+    </form>
+
+    <ul>
+        <li th:each="todo : ${todos}">
+            <span th:text="${todo.task}" 
+                  th:style="${todo.completed} ? 'text-decoration: line-through;' : ''"></span>
+            <div>
+                <a th:href="@{'/toggle/' + ${todo.id}}">[Toggle]</a>
+                <a th:href="@{'/delete/' + ${todo.id}}">[Delete]</a>
+            </div>
+        </li>
+    </ul>
+</body>
+</html>-->
