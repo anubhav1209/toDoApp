@@ -22,9 +22,6 @@ public class ToDoService {
 	}
 	
 	
-//	public Task addItem(Task item) {
-//		return taskRepository.save(item);
-//	}
 	public Task addItem(Task task) {
         return taskRepository.save(task);
     }
@@ -38,4 +35,10 @@ public class ToDoService {
 		item.setCompleted(!item.isCompleted());
 		return taskRepository.save(item);
 	}
+
+
+//	public Task findAll() {
+//		
+//		return taskRepository.findAll();
+//	}
 }
