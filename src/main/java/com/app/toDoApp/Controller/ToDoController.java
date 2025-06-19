@@ -1,17 +1,11 @@
 package com.app.toDoApp.Controller;
 
-import java.util.List;
-
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.toDoApp.Entity.Task;
@@ -22,7 +16,7 @@ import com.app.toDoApp.Service.ToDoService;
 @RequestMapping("api/todos")
 public class ToDoController {
 	
-	private final ToDoService toDoService;
+	private ToDoService toDoService;
 	
 	public ToDoController(ToDoService toDoService) {
 		this.toDoService=toDoService;
@@ -52,12 +46,21 @@ public class ToDoController {
 //	}
 	
 	
+	
 	@GetMapping("/")
 	public String index(Model model) {
-	    model.addAttribute("tasks", toDoService.getAllTasks());
-	    model.addAttribute("task", new Task());  // ✅ this line is essential
-	    return "index";
+	    model.addAttribute("task", new Task());  // 🟢 Provides the object needed for form binding
+	    model.addAttribute("todos", toDoService.getAllTasks());
+	    return "index"; // loads templates/index.html
 	}
+
+
+//	@GetMapping("/todos")
+//	public String getTasks(Model model) {
+//	    model.addAttribute("todos", toDoService.getAllTasks());
+//	    model.addAttribute("task", new Task()); // This fixes the error
+//	    return "index";
+//	}
 	
     @PostMapping("/add")
     public String addToDo(@ModelAttribute("todoItem") Task Task) {

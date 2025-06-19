@@ -1,24 +1,3 @@
-<!--<!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8"
-		<title> Todo Application </title>
-	</head>
-	<body>
-		<h1>TO DO APPLICATION</h1>
-		
-		<div>
-			<th:block th:each="task : ${tasks}">
-				<div>
-					<span th:text="${task.title}"> TASK TITLE </span>
-				</div>
-				
-			</th:block>
-		</div>
-	</body>
-</html>
--->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -32,22 +11,16 @@
 </head>
 <body>
     <h1>To-Do List</h1>
-
 	
 	<form th:action="@{/add}" th:object="${task}" method="post">
-	    <input type="text" th:field="*{title}" placeholder="Title"/>
-	    <input type="text" th:field="*{description}" placeholder="Description"/>
-	    <button type="submit">Add</button>
+	    <input type="text" th:field="*{name}" placeholder="Enter task" required />
+	    <button type="submit">Add Task</button>
 	</form>
 
-    <form th:action="@{/add}" method="post">
-        <input type="text" th:field="*{task}" placeholder="New task..." required />
-        <button type="submit">Add</button>
-    </form>
 
     <ul>
         <li th:each="todo : ${todos}">
-            <span th:text="${todo.task}" 
+            <span th:text="${todo.title} + ' - ' + ${todo.description}"
                   th:style="${todo.completed} ? 'text-decoration: line-through;' : ''"></span>
             <div>
                 <a th:href="@{'/toggle/' + ${todo.id}}">[Toggle]</a>

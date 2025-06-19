@@ -16,11 +16,11 @@ public class ToDoService {
 	@Autowired
 	private TaskRepository taskRepository;
 
+	
 	public List<Task> getAllTasks() {
 		
 		return taskRepository.findAll();
 	}
-	
 	
 	public Task addItem(Task task) {
         return taskRepository.save(task);
@@ -30,15 +30,16 @@ public class ToDoService {
 		taskRepository.deleteById(id);
 	}
 	
-	public Task toggleStatus(Long id) {
-		Task item = taskRepository.findById(id).orElseThrow();
-		item.setCompleted(!item.isCompleted());
-		return taskRepository.save(item);
+	public void toggleStatus(Long id) {
+//		Task item = taskRepository.findById(id).orElseThrow();
+//		item.setCompleted(!item.isCompleted());
+//		return taskRepository.save(item);
+		
+		Task task = taskRepository.findById(id).orElse(null);
+        if (task != null) {
+            task.setCompleted(!task.isCompleted());
+            taskRepository.save(task);
+        }
 	}
 
-
-//	public Task findAll() {
-//		
-//		return taskRepository.findAll();
-//	}
 }
